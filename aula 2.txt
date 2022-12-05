@@ -1,0 +1,41 @@
+create database senac
+default character set utf8mb4
+default collate utf8mb4_general_ci;
+
+drop table alunos;
+
+use senac;
+
+desc alunos;
+
+create table alunos(
+	matricula int unique auto_increment not null,
+    nome varchar(30) not null,
+    nascimento date,
+    peso decimal(5,2),
+    altura decimal(3,2),
+    sexo enum('M', 'F'),
+    cidade varchar(30) default 'Porto Alegre',
+    primary key (matricula)
+)default charset = utf8mb4;
+
+desc alunos;
+
+insert into alunos
+	(matricula, nome, nascimento, peso, altura, sexo, cidade)
+values
+	('1', 'Carlos', '1990-02-26', '85.5', '1.50', 'M', 'piratini'),
+	(default, 'Kassie Jones', '2001-12-19', '60.00', '2.00', 'F', default),
+	(default, 'Elejalmo', '1860-06-30', '26.00', '1.25', 'M', default),
+	(default, 'Nomyko', '2002-08-16', '70.00', '1.70', 'F', 'Japão'),
+	(default, 'Enzo', '2009-02-18', '110.00', '1.15', 'M', 'Fortnite'),
+	(default, 'Luizinho_Skate_13', '2010-10-10', '20.00','1.59', 'M', default);
+
+select * from alunos;
+
+insert into alunos
+(nome, nascimento)
+values 
+('Rogeria', '2001-08-23');
+
+create table alunos2 select * from alunos;

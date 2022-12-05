@@ -1,0 +1,55 @@
+create database <nome no banco>
+default character set utf8mb4
+default collate utf8mb4_general_ci;
+
+use <nome do banco>;
+
+create table personagens(
+	id int not null auto_increment,
+	nome varchar(20) not null,
+	stand varchar(20) default'none',
+	nascimento date,
+	sexo enum('M', 'F'),
+	peso decimal(5,2),
+	altura decimal(3,2),
+	nacionalidade varchar(20) default 'Japão',
+	primary key (id)
+)default charset = utf8mb4;
+
+create table job(
+	job_id int not null auto_increment,
+	jo_title varchar(20) not null,
+	min_salary float default'8000.00',
+	max_salary decimal(8,2),
+	primary key (job_id)
+
+)default charset = utf8mb4;
+
+create table countries(
+	country_id int not null unique auto_increment,
+	country_name varchar(30) not null,
+	region_name varchar(20) not null,
+	primary key(country_id)
+
+)default charset = utf8mb4;
+
+use jojo;
+
+insert into personagens
+(id, nome, stand, nascimento, sexo, peso, altura, nacionalidade)
+values
+('1', 'Dio', 'The World', '1867-12-25', 'M', '105.00', '1.95', 'Inglaterra');
+
+select * from personagens;
+
+insert into personagens
+(id, nome, stand, nascimento, sexo, peso, altura, nacionalidade)
+values
+(default, 'Jotaro', 'Star Platinum', '1970-11-4', 'M', '82.00', '1.95', default);
+
+insert into personagens
+(id, nome, stand, nascimento, sexo, peso, altura, nacionalidade)
+values
+(default, 'Joseph', 'Hermit Purple', '1920-09-27', 'M', '97.00', '1.95', 'Inglaterra'),
+(default, 'Jonathan', 'Jonathan Stand (unnamed)', '1868-03-04', 'M', '105.00', '1.95', 'Inglaterra'),
+(default, 'Kakyoin', 'Hierophant Green', '1971-01-22', 'M', '65.00', '1.78', default);

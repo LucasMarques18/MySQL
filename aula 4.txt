@@ -1,0 +1,106 @@
+create database universidade;
+use universidade;
+
+desc alunos;
+drop table turma;
+create table alunos (
+	matricula int,
+    nome varchar(30),
+    endereco varchar(50),
+    cidade varchar (20),
+    primary key (matricula)
+
+)default charset = utf8mb4;
+
+create table disciplinas (
+	cod_disc char(3),
+    nome_disc varchar (40),
+    carga_hor int (3),
+    primary key (cod_disc)
+
+)default charset = utf8mb4;
+
+create table professores (
+	cod_prof int(6),
+    nome varchar(30),
+    endereco varchar(50),
+    cidade varchar(20),
+    primary key (cod_prof)
+
+)default charset = utf8mb4;
+
+create table apoio (
+	cod_turma int(1)
+        
+)default charset = utf8mb4;
+
+
+create table turma (
+	cod_disc char(3),
+    cod_turma year,         
+    cod_prof int(6),
+    ano year,
+    horario char(7),
+    primary key (cod_turma, ano),
+    foreign key (cod_disc) references disciplinas(cod_disc),
+    foreign key (cod_prof) references professores(cod_prof)
+
+)default charset = utf8mb4;
+
+create table historico (
+	matricula int,
+    cod_disc char(3),
+	cod_turma int(1),
+    cod_prof int(6),
+	ano year,
+    frequencia int(3),
+    nota decimal (3,1),
+    foreign key (matricula) references alunos(matricula),
+    foreign key (cod_disc) references turma(cod_disc),
+    foreign key (cod_turma, ano) references turma(cod_turma, ano),
+    foreign key (cod_prof) references turma(cod_prof)
+    
+)engine= InnoDB default charset = utf8mb4;
+
+desc historico;
+
+insert into alunos 
+values
+(2015010101, 'JOSE DE ALENCAR', 'RUA DAS ALMAS', 'NATAL'),
+(2015010102, 'JOÃO JOSÉ', 'AVENIDA RUY CARNEIRO', 'JOÃO PESSOA'),
+(2015010103, 'MARIA JOAQUINA', 'RUA CARROSSEL', 'RECIFE'),
+(2015010104, 'MARIA DAS DORES', 'RUA DAS LADEIRAS', 'FORTALEZA'),
+(2015010105, 'JOSUÉ CLAUDINO DOS SANTOS', 'CENTRO', 'NATAL'),
+(2015010106, 'JOSUÉLISSON CLAUDINO DOS SANTOS', 'CENTRO', 'NATAL');
+
+insert into disciplinas
+values
+('BD', 'BANCO DE DADOS', '100'),
+('POO', 'PROGRAMAÇÃO COM ACESSO A BANCO DE DADOS', '100'),
+('WEB', 'AUTORIA WEB', '50'),
+('ENG', 'ENGENHARIA DE SOFTWARE', '80');
+
+insert into professores
+values 
+('212131', 'NICKERSON FERREIRA', 'RUA MANAÍRA', 'JOÃO PESSOA'),
+('122135', 'ADORILSON BEZERRA', 'AVENIDA SALGADO FILHO', 'NATAL'),
+('192011', 'DIEGO OLIVEIRA', 'AVENIDA ROBERTO FREIRE', 'NATAL');
+
+insert into apoio
+values
+('1'),
+('2'),
+('1'),
+('1'),
+('1');
+
+insert into turma 
+(cod_disc, cod_turma, cod_prof, ano, horario)
+values 
+('BD', '1', '212131', '2015', '11H-12H'),
+('BD', '2', '212131', '2015', '13H-14H'),
+('POO', '1', '192011', '2015', '08H-09H'),
+('WEB', '1', '192011', '2015', '07H-08H'),
+('ENG', '1', '122135', '2015', '10H-11H');
+
+select * from turma;
